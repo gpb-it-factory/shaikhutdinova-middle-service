@@ -2,14 +2,15 @@ package usecases;
 
 import base.Callback;
 import domain.model.CreateUserRequestDto;
+import domain.model.UserDto;
 import domain.repository.Repository;
 import controller.model.User;
 
 public class CreateUserInteractor {
 
-    Repository<User, CreateUserRequestDto, Integer> userRepository;
+    Repository<UserDto, CreateUserRequestDto, Integer> userRepository;
 
-    public CreateUserInteractor(Repository<User, CreateUserRequestDto, Integer> userRepository) {
+    public CreateUserInteractor(Repository<UserDto, CreateUserRequestDto, Integer> userRepository) {
         this.userRepository = userRepository;
     }
 
