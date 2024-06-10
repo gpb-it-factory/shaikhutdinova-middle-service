@@ -4,17 +4,17 @@ import base.Callback;
 import domain.model.CreateUserRequestDto;
 import domain.model.UserDto;
 import domain.repository.Repository;
-import controller.model.User;
 
 public class CreateUserInteractor {
 
-    Repository<UserDto, CreateUserRequestDto, Integer> userRepository;
+    Repository<UserDto, CreateUserRequestDto, Long> userRepository;
 
-    public CreateUserInteractor(Repository<UserDto, CreateUserRequestDto, Integer> userRepository) {
+    public CreateUserInteractor(Repository<UserDto, CreateUserRequestDto, Long> userRepository) {
         this.userRepository = userRepository;
     }
 
-    public void createUser(String name, String email, Callback callback) {
-        userRepository.create(new CreateUserRequestDto(name, email), callback);
+    public void createUser(Long userId, String userName, Callback callback) {
+        userRepository.create(new CreateUserRequestDto(userId, userName), callback);
+        callback.onSuccess();
     }
 }

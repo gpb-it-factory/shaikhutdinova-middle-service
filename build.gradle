@@ -3,23 +3,8 @@ plugins {
 }
 
 group 'com.example'
-version '1.0-SNAPSHOT'
+version '1.0.1'
 
 repositories {
     mavenCentral()
 }
-
-dependencies {
-    // Для работы с HTTP сервером
-    implementation 'com.sun.net.httpserver:http:20070405'
-
-    // Для работы с JSON
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.0'
-
-    // Для логирования (опционально)
-    implementation 'org.slf4j:slf4j-api:1.7.32'
-    implementation 'org.slf4j:slf4j-simple:1.7.32'
-}
-
-// Опционально: задание параметров компиляции и другие настройки
-compileJava.options.encoding = 'UTF-8'

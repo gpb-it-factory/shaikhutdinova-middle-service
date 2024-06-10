@@ -4,19 +4,17 @@ import java.util.Objects;
 
 // Класс, представляющий пользователя
 public class UserDto {
-    private int userId; // Идентификатор пользователя
+    private Long userId; // Идентификатор пользователя
     private String userName; // Имя пользователя
-    private String email; // Электронная почта пользователя
-    private String password; // Пароль пользователя
 
-    public UserDto(int userId, String userName, String email, String password) {
+
+    public UserDto(Long userId, String userName) {
         this.userId = userId;
         this.userName = userName;
-        this.email = email;
-        this.password = password;
+
     }
 
-    public int getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
@@ -24,38 +22,25 @@ public class UserDto {
         return userName;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
     @Override
     public String toString() {
-        return "User{" +
+        return "UserDto{" +
                 "userId=" + userId +
                 ", userName='" + userName + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
                 '}';
     }
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof UserDto)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         UserDto userDto = (UserDto) o;
-        return getUserId() == userDto.getUserId() &&
-                Objects.equals(getUserName(), userDto.getUserName()) &&
-                Objects.equals(getEmail(), userDto.getEmail()) &&
-                Objects.equals(getPassword(), userDto.getPassword());
+        return Objects.equals(userId, userDto.userId) && Objects.equals(userName, userDto.userName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getUserId(), getUserName(), getEmail(), getPassword());
+        return Objects.hash(userId, userName);
     }
-
 }
