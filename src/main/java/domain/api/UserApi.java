@@ -7,7 +7,7 @@ import domain.model.UserDto;
 //абстракция над источником информации о пользователях
 public interface UserApi {
 
-    void createUser(String name, String email, Callback callback);
+    void createUser(Long userId, String userName, Callback callback);
 
-    void getUser(int userId, EventCallback<UserDto> eventCallback);
+    void getUser(Long userId, EventCallback<UserDto> eventCallback);
 }

@@ -11,24 +11,24 @@ import java.util.Random;
 // имплементация замоканных данных о пользователях
 public class RuntimeMockUserApi implements UserApi {
 
-    HashMap<Integer, UserDto> users = new HashMap<>();
+    HashMap<Long, UserDto> users = new HashMap<>();
 
     @Override
-    public void createUser(String name, String email, Callback callback) {
-        int userId = new Random().nextInt();
+    public void createUser(Long userId, String userName, Callback callback) {
+
         if (users.containsKey(userId)) {
             callback.onError(new IllegalStateException("Пользователь с таким идентификатором уже существует " + userId));
         } else {
-            users.put(userId, new UserDto(userId, name, email, Integer.toString(new Random().nextInt())));
+            users.put(userId, new UserDto(userId,userName));
         }
 
-        for (Map.Entry<Integer, UserDto> entry : users.entrySet()) {
+        for (Map.Entry<Long, UserDto> entry : users.entrySet()) {
             System.out.println(entry.getKey() + "=" + entry.getValue());
         }
     }
 
     @Override
-    public void getUser(int userId, EventCallback<UserDto> eventCallback) {
+    public void getUser(Long userId, EventCallback<UserDto> eventCallback) {
         if (users.containsKey(userId)) {
             eventCallback.onNewEvent(users.get(userId));
         } else {

@@ -46,8 +46,7 @@ public class User {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof UserDto)) return false;
-        UserDto userDto = (UserDto) o;
+        if (!(o instanceof UserDto userDto)) return false;
         return getUserId() == userDto.getUserId();
     }
 

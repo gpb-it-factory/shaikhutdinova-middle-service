@@ -11,12 +11,11 @@ import usecases.CreateUserInteractor;
 
 public class UserController {
     UserApi api = new UserApiCreator(true).create();
-    Repository<UserDto, CreateUserRequestDto, Integer> repository = new UserRepository(api);
+    Repository<UserDto, CreateUserRequestDto, Long> repository = new UserRepository(api);
     CreateUserInteractor createUserInteractor = new CreateUserInteractor(repository);
 
 
-    public void createUser(String name, String email, Callback callback) {
-
-        createUserInteractor.createUser(name, email, callback);
+    public void createUser(Long userId, String userName, Callback callback) {
+        createUserInteractor.createUser(userId, userName, callback);
     }
 }

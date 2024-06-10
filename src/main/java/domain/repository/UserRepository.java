@@ -8,7 +8,7 @@ import domain.model.UserDto;
 
 //Инкапсуляция обращения к источнику данных о пользователе
 
-public class UserRepository implements Repository<UserDto, CreateUserRequestDto, Integer> {
+public class UserRepository implements Repository<UserDto, CreateUserRequestDto, Long> {
     private final UserApi userApi;
 
     public UserRepository(UserApi userApi) {
@@ -17,12 +17,12 @@ public class UserRepository implements Repository<UserDto, CreateUserRequestDto,
 
     @Override
     public void create(CreateUserRequestDto params, Callback callback) {
-        userApi.createUser(params.getName(), params.getEmail(), callback);
+        userApi.createUser(params.getUserId(), params.getUserName(), callback);
     }
 
     @Override
-    public void get(Integer id, EventCallback<UserDto> eventCallback) {
-        userApi.getUser(id, eventCallback);
+    public void get(Long userId, EventCallback<UserDto> eventCallback) {
+        userApi.getUser(userId, eventCallback);
     }
 
     @Override
@@ -31,7 +31,7 @@ public class UserRepository implements Repository<UserDto, CreateUserRequestDto,
     }
 
     @Override
-    public void delete(Integer id, Callback callback) {
+    public void delete(Long id, Callback callback) {
         callback.onError(new UnsupportedOperationException("not supported"));
     }
 }
