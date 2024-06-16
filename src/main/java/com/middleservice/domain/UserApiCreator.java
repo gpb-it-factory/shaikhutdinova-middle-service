@@ -1,6 +1,6 @@
-package domain.api;
+package com.middleservice.domain;
 
-import base.Creator;
+import com.middleservice.base.Creator;
 
 //Фактори для UserApi
 public class UserApiCreator implements Creator<UserApi> {
