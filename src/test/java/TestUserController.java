@@ -23,7 +23,7 @@ public class TestUserController extends ControllerTest {
 
     @Test
     void whenPassToRequestBodyValidTelegramUserId_thenReturnStatus204() throws Exception {
-        var createUserRequest = post("api/users")
+        var createUserRequest = post("/api/users")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("""
                         {"userId":1,
