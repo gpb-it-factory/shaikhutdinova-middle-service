@@ -2,6 +2,7 @@ package com.middleservice.presentation;
 
 import com.middleservice.application.UserService;
 import com.middleservice.domain.UserAlreadyExistsException;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,7 @@ public class UserController {
 
     @ResponseStatus(value = HttpStatus.NO_CONTENT, reason = "Пользовтаель создан")
     @PostMapping("/users")
-    public CreateUserResponse createUser(@RequestBody CreateUserRequest request) throws UserAlreadyExistResponseException {
+    public CreateUserResponse createUser(@Valid @RequestBody CreateUserRequest request) throws UserAlreadyExistResponseException {
         try {
             userService.createUser(request.getUserId(), request.getUserName());
         } catch (UserAlreadyExistsException e) {
