@@ -1,24 +1,19 @@
 package com.middleservice.domain;
 
-import org.springframework.stereotype.Component;
-
 import java.util.Objects;
 
 public class User {
     private final Long userId; // Идентификатор пользователя
     private final String userName; // Имя пользователя
 
-
     public User(Long userId, String userName) {
         this.userId = userId;
         this.userName = userName;
-
     }
 
     public Long getUserId() {
         return userId;
     }
-
     public String getUserName() {
         return userName;
     }
@@ -30,7 +25,6 @@ public class User {
                 ", userName='" + userName + '\'' +
                 '}';
     }
-
 
     @Override
     public boolean equals(Object o) {

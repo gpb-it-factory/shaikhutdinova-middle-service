@@ -1,3 +1,4 @@
+package com.middleservice.presentation;
 
 import com.middleservice.MiddleServiceApplication;
 import org.junit.jupiter.api.Test;
@@ -18,7 +19,7 @@ public class TestUserController extends ControllerTest {
 
     @Test
     void whenPassToRequestBodyValidTelegramUserId_thenReturnStatus204() throws Exception {
-        var createUserRequest = post("/api/users")
+        var createUserRequest = post("/api/v2/users")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("""
                         {"userId":1,
@@ -35,7 +36,7 @@ public class TestUserController extends ControllerTest {
 
     @Test
     void whenUserAlreadyExists_thenReturnStatus409() throws Exception {
-        var createUserRequest = post("/api/users")
+        var createUserRequest = post("/api/v2/users")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("""
                         {

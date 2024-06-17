@@ -19,7 +19,7 @@ public class UserController {
     }
 
     @ResponseStatus(value = HttpStatus.NO_CONTENT, reason = "Пользовтаель создан")
-    @PostMapping("/users")
+    @PostMapping("/v2/users")
     public CreateUserResponse createUser(@Valid @RequestBody CreateUserRequest request) throws UserAlreadyExistResponseException {
         try {
             userService.createUser(request.getUserId(), request.getUserName());
