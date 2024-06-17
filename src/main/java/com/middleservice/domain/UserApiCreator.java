@@ -1,6 +1,7 @@
 package com.middleservice.domain;
 
 import com.middleservice.base.Creator;
+import org.springframework.stereotype.Component;
 
 //Фактори для UserApi
 public class UserApiCreator implements Creator<UserApi> {
