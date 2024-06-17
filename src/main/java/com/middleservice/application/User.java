@@ -1,9 +1,6 @@
 package com.middleservice.application;
 
-import org.springframework.stereotype.Component;
-
 import java.util.Objects;
-
 
 public class User {
 
@@ -18,7 +15,6 @@ public class User {
     public Long getUserId() {
         return userId;
     }
-
     public String getUserName() {
         return userName;
     }

@@ -5,7 +5,6 @@ import com.middleservice.domain.UserAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 @Service
 public class UserService {
 
@@ -16,5 +15,4 @@ public class UserService {
         User user = new User(userId,userName);
         userRepository.createUser(user.getUserId(), user.getUserName());
     }
-
 }

@@ -3,11 +3,8 @@ package com.middleservice.domain;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-//Инкапсуляция обращения к источнику данных о пользователе
-
 @Repository
 public class UserRepository {
-
     private final UserApi userApi;
 
     @Autowired

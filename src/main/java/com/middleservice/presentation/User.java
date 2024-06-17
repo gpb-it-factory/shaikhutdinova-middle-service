@@ -1,9 +1,6 @@
 package com.middleservice.presentation;
 
-import org.springframework.stereotype.Component;
-
 import java.util.Objects;
-
 
 public class User {
     private final long userId; // Идентификатор пользователя
