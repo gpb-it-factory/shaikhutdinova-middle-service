@@ -1,6 +1,9 @@
 package com.middleservice.application;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Objects;
+
 
 public class User {
 

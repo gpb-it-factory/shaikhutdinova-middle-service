@@ -1,5 +1,8 @@
 package com.middleservice.presentation;
 
+import org.springframework.stereotype.Component;
+
+
 public class CreateUserResponse {
 
     private final  long userId;
