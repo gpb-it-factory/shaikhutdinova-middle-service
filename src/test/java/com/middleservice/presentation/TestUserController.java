@@ -1,6 +1,7 @@
 package com.middleservice.presentation;
 
 import com.middleservice.MiddleServiceApplication;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,30 +13,31 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
-@SpringBootTest(classes = MiddleServiceApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest
 @AutoConfigureMockMvc
 public class TestUserController extends ControllerTest {
 
 
     @Test
-    void whenPassToRequestBodyValidTelegramUserId_thenReturnStatus204() throws Exception {
+    @DisplayName("Проверка успешного создания пользователя")
+    void shouldCreateUserSuccessfully() throws Exception {
         var createUserRequest = post("/api/v2/users")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("""
-                        {"userId":1,
-                        "userName":"Joe"}
+                        {
+                          "userId": 1,
+                          "userName": "Joe"
+                        }
                         """);
 
         mockMvc.perform(createUserRequest)
                 .andDo(print())
-                .andExpect(status().isNoContent());
-
-
+                .andExpect(status().isCreated());
     }
 
-
     @Test
-    void whenUserAlreadyExists_thenReturnStatus409() throws Exception {
+    @DisplayName("Проверка, что при создании существующего пользователя возвращается статус 409")
+    void shouldReturnStatus409WhenUserAlreadyExists() throws Exception {
         var createUserRequest = post("/api/v2/users")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("""
@@ -46,7 +48,11 @@ public class TestUserController extends ControllerTest {
                         """);
 
 
-        // Try to create the same user again
+        mockMvc.perform(createUserRequest)
+                .andDo(print())
+                .andExpect(status().isCreated());
+
+
         mockMvc.perform(createUserRequest)
                 .andDo(print())
                 .andExpect(status().isConflict());

@@ -1,0 +1,16 @@
+spring:
+  profiles:
+    active: mock
+
+com:
+  middleservice:
+    presentation:
+      name: middleservice
+
+debug: true
+enableLoggingRequestDetails: true
+
+logging:
+  level:
+    root: debug
+    org.springframework.web: debug

@@ -12,9 +12,13 @@ public class UserRepository {
         this.userApi = userApi;
     }
 
-    public User createUser(long userId, String userName) throws UserAlreadyExistsException {
+    public void createUser(long userId, String userName) throws UserAlreadyExistsException {
         User user = new User(userId, userName);
         userApi.createUser(user.getUserId(), user.getUserName());
-        return user;
+    }
+
+    public void createAccount(long userId, String accountName) throws AccountAlreadyExistException, UserNotFoundException {
+        Account account = new Account(userId, accountName);
+        userApi.createAccount(account.getUserId(), account.getAccountName());
     }
 }
