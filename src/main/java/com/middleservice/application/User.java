@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class User {
 
-    private Long userId; // Идентификатор пользователя
-    private String userName; // Имя пользователя
+    private Long userId;
+    private String userName;
 
     public User(Long userId, String userName) {
         this.userId = userId;
