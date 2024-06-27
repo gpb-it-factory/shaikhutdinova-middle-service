@@ -2,21 +2,20 @@ package com.middleservice.presentation;
 
 import com.middleservice.application.UserService;
 import com.middleservice.domain.UserAlreadyExistsException;
-import com.middleservice.domain.UserNotFoundException;
+
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
-@Service
+@RestController
 @RequestMapping("/api")
 public class UserController {
 
     private final UserService userService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController (UserService userService) {
         this.userService = userService;
     }
 
