@@ -1,0 +1,37 @@
+# application.yml
+spring:
+  profiles:
+    active: mock
+
+# Common configuration
+spring:
+  com:
+    middleservice:
+      presentation:
+        name: middleservice
+
+debug: true
+enableLoggingRequestDetails: true
+
+logging:
+  level:
+    root: debug
+    org.springframework.web: debug
+
+---
+spring:
+  config:
+    activate:
+      on-profile: mock
+mock:
+  userApi:
+    implementation: mock
+
+---
+spring:
+  config:
+    activate:
+      on-profile: real
+real:
+  userApi:
+    implementation: real
