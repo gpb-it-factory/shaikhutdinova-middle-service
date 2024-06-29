@@ -24,7 +24,7 @@ public class UserService {
     }
 
     public void createAccount(long userId) throws AccountAlreadyExistException, UserNotFoundException {
-        Account account = new Account(userId, "Акционный");
-        userRepository.createAccount(account.getUserId(), account.getAccountName());
+        String accountName = "Акционный";
+        userRepository.createAccount(userId, accountName);
     }
 }

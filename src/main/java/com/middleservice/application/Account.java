@@ -6,10 +6,12 @@ public class Account {
 
     private final long userId;
     private final String accountName;
+    private double balance;
 
-    public Account(long userId, String accountName) {
+    public Account(long userId, String accountName, double balance) {
         this.userId = userId;
         this.accountName = accountName;
+        this.balance = balance;
     }
 
     public long getUserId() {
@@ -20,12 +22,8 @@ public class Account {
         return accountName;
     }
 
-    @Override
-    public String toString() {
-        return "Account{" +
-                "userId=" + userId +
-                ", accountName='" + accountName + '\'' +
-                '}';
+    public double getBalance() {
+        return balance;
     }
 
     @Override
@@ -33,11 +31,21 @@ public class Account {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Account account = (Account) o;
-        return userId == account.userId && Objects.equals(accountName, account.accountName);
+        return userId == account.userId && Double.compare(balance, account.balance) == 0 && Objects.equals(accountName, account.accountName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, accountName);
+        return Objects.hash(userId, accountName, balance);
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "userId=" + userId +
+                ", accountName='" + accountName + '\'' +
+                ", balance=" + balance +
+                '}';
     }
 }
+

@@ -26,8 +26,8 @@ public class RuntimeMockUserApi implements UserApi {
         if (usersAccounts.containsKey(userId)) {
             throw new AccountAlreadyExistException("Счет для пользователя с ID " + userId + " уже зарегистрирован");
         }
-
-        usersAccounts.put(userId, new Account(userId, accountName));
+        double initialBalance = 5000.0;
+        usersAccounts.put(userId, new Account(userId, accountName, initialBalance));
         for (Map.Entry<Long, Account> entry : usersAccounts.entrySet()) {
             System.out.println(entry.getKey() + "=" + entry.getValue());
         }
