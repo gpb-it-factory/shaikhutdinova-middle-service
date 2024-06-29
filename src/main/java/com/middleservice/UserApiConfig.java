@@ -11,13 +11,13 @@ import org.springframework.context.annotation.Profile;
 public class UserApiConfig {
     @Bean
     @Profile("mock")
-    public UserApi runtimeMockUserApi() {
+    public UserApi mockUserApi() {
         return new RuntimeMockUserApi();
     }
 
     @Bean
     @Profile("real")
     public UserApi realUserApi() {
-        return new RealUserApi();
+        return new RealUserApi(); // Реальная реализация UserApi
     }
 }
