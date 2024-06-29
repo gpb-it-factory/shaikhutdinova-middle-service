@@ -16,4 +16,8 @@ public class UserRepository {
         User user = new User(userId, userName);
         userApi.createUser(user.getUserId(), user.getUserName());
     }
+
+    public void createAccount(long userId, String accountName) throws AccountAlreadyExistException, UserNotFoundException {
+        userApi.createAccount(userId, accountName);
+    }
 }

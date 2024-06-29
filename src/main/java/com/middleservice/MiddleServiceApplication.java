@@ -9,7 +9,9 @@ import org.springframework.context.annotation.Import;
 @Import(UserApiConfig.class)
 
 @SpringBootApplication
-public class MiddleServiceApplication {
+public class
+
+MiddleServiceApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(MiddleServiceApplication.class, args);

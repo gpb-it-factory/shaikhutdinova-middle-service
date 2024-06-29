@@ -5,4 +5,9 @@ public class RealUserApi implements UserApi{
     public void createUser(Long userId, String userName) throws UserAlreadyExistsException {
         // WIP
     }
+
+    @Override
+    public void createAccount(Long userId, String accountName) throws AccountAlreadyExistException, UserNotFoundException {
+        // WIP
+    }
 }
