@@ -4,6 +4,7 @@ import com.middleservice.application.UserService;
 import com.middleservice.domain.AccountAlreadyExistException;
 import com.middleservice.domain.UserAlreadyExistsException;
 
+import com.middleservice.domain.UserNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

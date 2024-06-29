@@ -1,11 +1,8 @@
 package com.middleservice.domain;
 
-import org.springframework.stereotype.Service;
-
 import java.util.HashMap;
 import java.util.Map;
 
-@Service
 public class RuntimeMockUserApi implements UserApi {
     HashMap<Long, User> users = new HashMap<>();
     HashMap<Long, Account> usersAccounts = new HashMap<>();
