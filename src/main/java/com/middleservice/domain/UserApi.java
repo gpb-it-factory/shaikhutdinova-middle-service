@@ -6,4 +6,8 @@ public interface UserApi {
     void createAccount(Long userId, String accountName) throws AccountAlreadyExistException, UserNotFoundException;
 
     Account getCurrentBalance(long userId) throws NoAccountFoundException, UserNotFoundException;
+
+    long getUserIdByUsername(String username) throws UserNotFoundException;
+
+    void updateAccount(Account account) throws UserNotFoundException, NoAccountFoundException;
 }

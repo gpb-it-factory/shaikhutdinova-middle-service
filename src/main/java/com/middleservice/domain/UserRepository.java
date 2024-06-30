@@ -24,4 +24,14 @@ public class UserRepository {
     public Account getCurrentBalance(long userId) throws NoAccountFoundException, UserNotFoundException {
         return userApi.getCurrentBalance(userId);
     }
+
+    public long getUserIdByUsername(String username) throws UserNotFoundException {
+        return userApi.getUserIdByUsername(username);
+    }
+
+    public void updateAccount(Account account) throws UserNotFoundException, NoAccountFoundException {
+        userApi.updateAccount(account);
+    }
+
+
 }

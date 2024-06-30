@@ -151,5 +151,59 @@ public class TestUserController extends ControllerTest {
                 .andExpect(jsonPath("$.accountName").value("Акционный"))
                 .andExpect(jsonPath("$.balance").value(5000.0));
     }
+
+    @Test
+    @DisplayName("Проверка успешного перевода средств")
+    void shouldTransferFundsSuccessfully() throws Exception {
+        // Создаем отправителя
+        mockMvc.perform(post("/api/v2/users")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {
+                                  "userId": 456,
+                                  "userName": "sender"
+                                }
+                                """))
+                .andDo(print())
+                .andExpect(status().isCreated());
+
+        // Создаем получателя
+        mockMvc.perform(post("/api/v2/users")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {
+                                  "userId": 457,
+                                  "userName": "receiver"
+                                }
+                                """))
+                .andDo(print())
+                .andExpect(status().isCreated());
+
+        // Создаем счет для отправителя
+        mockMvc.perform(post("/api/v2/users/456/accounts")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isCreated());
+
+        // Создаем счет для получателя
+        mockMvc.perform(post("/api/v2/users/457/accounts")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isCreated());
+
+        // Переводим средства
+        mockMvc.perform(post("/api/v2/transfers")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {
+                                  "from": "sender",
+                                  "to": "receiver",
+                                  "amount": "1000.00"
+                                }
+                                """))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
 }
+
 
