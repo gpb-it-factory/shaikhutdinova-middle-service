@@ -1,10 +1,8 @@
 package com.middleservice.presentation;
 
 import com.middleservice.application.UserService;
-import com.middleservice.domain.AccountAlreadyExistException;
-import com.middleservice.domain.UserAlreadyExistsException;
+import com.middleservice.domain.*;
 
-import com.middleservice.domain.UserNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +15,7 @@ public class UserController {
     private final UserService userService;
 
     @Autowired
-    public UserController (UserService userService) {
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
@@ -34,7 +32,7 @@ public class UserController {
     }
 
     @ResponseStatus(value = HttpStatus.CREATED)
-    @PostMapping(path ="/v2/users/{id}/accounts")
+    @PostMapping(path = "/v2/users/{id}/accounts")
     public CreateAccountResponse createAccount(@PathVariable long id) throws AccountAlreadyExistResponseException, UserNotFoundResponseException {
         try {
             userService.createAccount(id);
@@ -44,5 +42,19 @@ public class UserController {
             throw new UserNotFoundResponseException();
         }
         return new CreateAccountResponse("Акционный счет создан успешно");
+    }
+
+    @ResponseStatus(value = HttpStatus.OK)
+    @GetMapping(path = "/v2/users/{id}/accounts")
+    public GetCurrentBalanceResponse getCurrentBalance(@PathVariable long id) throws AccountAlreadyExistResponseException, UserNotFoundResponseException {
+        try {
+            Account account = userService.getCurrentBalance(id);
+            return new GetCurrentBalanceResponse(account.getAccountId(), account.getAccountName(), account.getBalance());
+
+        } catch (NoAccountFoundException e) {
+            throw new AccountAlreadyExistResponseException();
+        } catch (UserNotFoundException e) {
+            throw new UserNotFoundResponseException();
+        }
     }
 }

@@ -1,15 +1,11 @@
 package com.middleservice.application;
 
-import com.middleservice.domain.AccountAlreadyExistException;
-import com.middleservice.domain.UserNotFoundException;
-import com.middleservice.domain.UserRepository;
-import com.middleservice.domain.UserAlreadyExistsException;
+import com.middleservice.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
-
 
     private final UserRepository userRepository;
 
@@ -26,5 +22,9 @@ public class UserService {
     public void createAccount(long userId) throws AccountAlreadyExistException, UserNotFoundException {
         String accountName = "Акционный";
         userRepository.createAccount(userId, accountName);
+    }
+
+    public Account getCurrentBalance(long userId) throws NoAccountFoundException, UserNotFoundException {
+        return userRepository.getCurrentBalance(userId);
     }
 }
