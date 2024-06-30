@@ -1,8 +1,6 @@
 package com.middleservice.presentation;
-
 import com.middleservice.application.UserService;
 import com.middleservice.domain.*;
-
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -57,4 +55,19 @@ public class UserController {
             throw new UserNotFoundResponseException();
         }
     }
+
+    @ResponseStatus(value = HttpStatus.OK)
+    @PostMapping(path = "/v2/transfers")
+    public TransferResponse createTransfer(@RequestBody CreateTransferRequest request) throws UserNotFoundResponseException, NoAccountFoundResponseException {
+        try {
+            return userService.createTransfer(request);
+        } catch (UserNotFoundException e) {
+            throw new UserNotFoundResponseException();
+        } catch (NoAccountFoundException e) {
+            throw new NoAccountFoundResponseException();
+        } catch (InsufficientFundsException e) {
+            throw new InsufficientFundsResponseException();
+        }
+    }
 }
+

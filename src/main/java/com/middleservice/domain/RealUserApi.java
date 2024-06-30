@@ -15,4 +15,9 @@ public class RealUserApi implements UserApi{
     public Account getCurrentBalance(long userId) throws NoAccountFoundException, UserNotFoundException {
         throw new IllegalStateException("Not supported");
     }
+
+    @Override
+    public long getUserIdByUsername(String username) throws UserNotFoundException {
+        throw new IllegalStateException("Not supported");
+    }
 }

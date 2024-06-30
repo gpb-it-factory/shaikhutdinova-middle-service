@@ -1,8 +1,12 @@
 package com.middleservice.application;
 
 import com.middleservice.domain.*;
+import com.middleservice.presentation.CreateTransferRequest;
+import com.middleservice.presentation.TransferResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.UUID;
 
 @Service
 public class UserService {
@@ -26,5 +30,24 @@ public class UserService {
 
     public Account getCurrentBalance(long userId) throws NoAccountFoundException, UserNotFoundException {
         return userRepository.getCurrentBalance(userId);
+    }
+
+    public TransferResponse createTransfer(CreateTransferRequest request) throws UserNotFoundException, InsufficientFundsException, NoAccountFoundException {
+        long fromUserId = userRepository.getUserIdByUsername(request.getFrom());
+        long toUserId = userRepository.getUserIdByUsername(request.getTo());
+
+        Account fromAccount = userRepository.getCurrentBalance(fromUserId);
+        Account toAccount = userRepository.getCurrentBalance(toUserId);
+
+        if (fromAccount.getBalance() < request.getAmount()) {
+            throw new InsufficientFundsException("Недостаточно средств для перевода");
+        }
+
+        fromAccount.setBalance(fromAccount.getBalance() - request.getAmount());
+        toAccount.setBalance(toAccount.getBalance() + request.getAmount());
+
+        String transferId = UUID.randomUUID().toString();
+
+        return new TransferResponse(transferId);
     }
 }
