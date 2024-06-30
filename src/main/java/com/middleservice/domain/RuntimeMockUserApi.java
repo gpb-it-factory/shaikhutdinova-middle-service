@@ -32,4 +32,18 @@ public class RuntimeMockUserApi implements UserApi {
             System.out.println(entry.getKey() + "=" + entry.getValue());
         }
     }
+
+    @Override
+    public Account getCurrentBalance(long userId) throws NoAccountFoundException, UserNotFoundException {
+        if (!users.containsKey(userId)) {
+            throw new UserNotFoundException("Пользователь с ID " + userId + " не найден");
+        }
+
+        Account account = usersAccounts.get(userId);
+        if (account == null) {
+            throw new NoAccountFoundException("Счет для пользователя с ID " + userId + " не найден");
+        }
+
+        return account;
+    }
 }

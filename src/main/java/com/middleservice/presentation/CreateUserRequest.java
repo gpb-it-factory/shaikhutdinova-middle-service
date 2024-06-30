@@ -7,7 +7,7 @@ public class CreateUserRequest {
 
     @NotNull(message = "не может быть пустым")
     @Positive(message = "значение должно содержать положительные целые числа")
-    private long userId; // Идентификатор пользователя
+    private long userId;
 
     @NotNull
     private String userName;

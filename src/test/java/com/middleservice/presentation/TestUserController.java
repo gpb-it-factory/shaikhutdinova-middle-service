@@ -4,8 +4,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class TestUserController extends ControllerTest {
@@ -113,4 +115,41 @@ public class TestUserController extends ControllerTest {
                 .andExpect(status().isNotFound());
     }
 
+    @Test
+    @DisplayName("Проверка успешного получения баланса")
+    void shouldGetCurrentBalanceSuccessfully() throws Exception {
+        // Сначала создадим пользователя
+        var createUserRequest = post("/api/v2/users")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("""
+                        {
+                            "userId": 5,
+                            "userName": "Eve"
+                        }
+                        """);
+
+        mockMvc.perform(createUserRequest)
+                .andDo(print())
+                .andExpect(status().isCreated());
+
+        // Затем создадим счет для этого пользователя
+        var createAccountRequest = post("/api/v2/users/5/accounts")
+                .contentType(MediaType.APPLICATION_JSON);
+
+        mockMvc.perform(createAccountRequest)
+                .andDo(print())
+                .andExpect(status().isCreated());
+
+        // Теперь запросим баланс счета
+        var getCurrentBalanceRequest = get("/api/v2/users/5/accounts")
+                .contentType(MediaType.APPLICATION_JSON);
+
+        mockMvc.perform(getCurrentBalanceRequest)
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.accountId").value(5))
+                .andExpect(jsonPath("$.accountName").value("Акционный"))
+                .andExpect(jsonPath("$.balance").value(5000.0));
+    }
 }
+

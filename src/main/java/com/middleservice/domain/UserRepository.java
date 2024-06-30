@@ -20,4 +20,8 @@ public class UserRepository {
     public void createAccount(long userId, String accountName) throws AccountAlreadyExistException, UserNotFoundException {
         userApi.createAccount(userId, accountName);
     }
+
+    public Account getCurrentBalance(long userId) throws NoAccountFoundException, UserNotFoundException {
+        return userApi.getCurrentBalance(userId);
+    }
 }
