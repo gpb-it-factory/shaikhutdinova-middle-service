@@ -20,4 +20,9 @@ public class RealUserApi implements UserApi{
     public long getUserIdByUsername(String username) throws UserNotFoundException {
         throw new IllegalStateException("Not supported");
     }
+
+    @Override
+    public void updateAccount(Account account) throws UserNotFoundException, NoAccountFoundException {
+        throw new IllegalStateException("Not supported");
+    }
 }

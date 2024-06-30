@@ -32,7 +32,7 @@ public class UserService {
         return userRepository.getCurrentBalance(userId);
     }
 
-    public TransferResponse createTransfer(CreateTransferRequest request) throws UserNotFoundException, InsufficientFundsException, NoAccountFoundException {
+    public TransferResponse createTransfer(CreateTransferRequest request) throws UserNotFoundException, NoAccountFoundException, InsufficientFundsException {
         long fromUserId = userRepository.getUserIdByUsername(request.getFrom());
         long toUserId = userRepository.getUserIdByUsername(request.getTo());
 
@@ -46,6 +46,10 @@ public class UserService {
         fromAccount.setBalance(fromAccount.getBalance() - request.getAmount());
         toAccount.setBalance(toAccount.getBalance() + request.getAmount());
 
+        userRepository.updateAccount(fromAccount);
+        userRepository.updateAccount(toAccount);
+
+        // Генерация уникального идентификатора перевода
         String transferId = UUID.randomUUID().toString();
 
         return new TransferResponse(transferId);

@@ -7,5 +7,7 @@ public interface UserApi {
 
     Account getCurrentBalance(long userId) throws NoAccountFoundException, UserNotFoundException;
 
-     long getUserIdByUsername(String username) throws UserNotFoundException;
+    long getUserIdByUsername(String username) throws UserNotFoundException;
+
+    void updateAccount(Account account) throws UserNotFoundException, NoAccountFoundException;
 }

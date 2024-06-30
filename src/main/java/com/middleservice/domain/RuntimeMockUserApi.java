@@ -56,4 +56,18 @@ public class RuntimeMockUserApi implements UserApi {
         }
         return userId;
     }
+
+    @Override
+    public void updateAccount(Account account) throws UserNotFoundException, NoAccountFoundException {
+        if (!users.containsKey(account.getAccountId())) {
+            throw new UserNotFoundException("Пользователь не найден");
+        }
+
+        if (!usersAccounts.containsKey(account.getAccountId())) {
+            throw new NoAccountFoundException("Счет для пользователя не найден");
+        }
+
+        usersAccounts.put(account.getAccountId(), account); // Обновление счета
+    }
 }
+
